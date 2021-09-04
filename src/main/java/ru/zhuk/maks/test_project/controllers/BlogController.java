@@ -4,10 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.zhuk.maks.test_project.models.Post;
 import ru.zhuk.maks.test_project.repo.PostRepository;
+
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class BlogController {
@@ -34,5 +38,13 @@ public class BlogController {
         return "redirect:/blog";
     }
 
+    @GetMapping("/blog/{id_num}")
+    public String blogDetails(@PathVariable(value="id_num") long id, Model model){
+        Optional<Post> post = postRepository.findById(id);
+        ArrayList<Post> res = new ArrayList<>();
+        post.ifPresent(res::add);
+        model.addAttribute("post", post.get());
+        return "blog-details";
+    }
 
 }
