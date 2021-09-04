@@ -4,10 +4,20 @@ import javax.persistence.*;
 
 @Entity
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
+
+    public Post() {
+    }
+
+    public Post(String title, String anons, String full_text) {
+        this.title = title;
+        this.anons = anons;
+        this.full_text = full_text;
+    }
 
     private String title, anons, full_text;
     private int views;
