@@ -11,9 +11,13 @@
     <div class="alert alert-info mt-2">
         <h3 th:text="${post.title}"></h3>
         <p th:text="${post.full_text}"></p>
-        <p th:text="${post.views}"></p>
-        <a th:href="'/blog/' + ${post.id} + '/edit'" class="btn btn-warning">Edit</a>
-        <a th:href="'/blog/' + ${post.id} + '/remove'" class="btn btn-warning">Delete</a>
+        <p><b>Просмотры: </b><span th:text="${post.views}"/></p>
+        <a th:href="'/blog/' + ${post.id} + '/edit'" class="btn btn-warning">Edit</a><br><br>
+        <form th:action="'/blog/' + ${post.id} + '/remove'" method="post">
+            <button class="btn btn-warning" type="submit">Delete</button>
+        </form>
+
+
     </div>
 </div>
 <div th:insert="blocks/footer :: footer"></div>
